@@ -1,6 +1,5 @@
 package com.example.hooghirmohammedhw4
 
-import android.bluetooth.BluetoothHidDevice
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle

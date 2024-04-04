@@ -37,6 +37,14 @@ android {
 
 dependencies {
 
+    // Glide dependencies... UNNCESSESARY???
+    implementation ("com.github.bumptech.glide:glide:5.0.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:5.0.0")
+
+    // Card View dependencies
+    implementation ("androidx.cardview:cardview:1.0.0")
+    implementation ("androidx.constraintlayout:constraintlayout:2.0.4")
+
     // GSON
     implementation("com.google.code.gson:gson:2.10.1")
     // Retrofit
