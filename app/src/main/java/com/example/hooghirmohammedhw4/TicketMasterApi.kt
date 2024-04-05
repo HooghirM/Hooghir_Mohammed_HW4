@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface TicketMasterApi {
-    @GET("events")
+    @GET("events.json")
     fun searchEvents (
         @Query("apikey") apiKey: String,
         @Query("keyword") searchTerm: String,

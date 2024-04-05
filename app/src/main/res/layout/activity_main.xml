@@ -57,17 +57,16 @@
         app:layout_constraintStart_toStartOf="@+id/editTextCity"
         app:layout_constraintTop_toTopOf="@+id/editTextKeyword" />
 
+
     <!-- Rows for Ticket -->
-  <!--  <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="409dp"
+        android:layout_height="610dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/ticket_row" /> -->
+        app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

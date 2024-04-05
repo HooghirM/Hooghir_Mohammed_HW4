@@ -15,6 +15,7 @@ import com.google.firebase.firestore.auth.User
 import com.google.gson.annotations.SerializedName
 import okhttp3.Response
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -53,10 +54,10 @@ class MainActivity : AppCompatActivity() {
         val ticketMasterAPI = retrofit.create(TicketMasterApi::class.java)
 
         //  “date,asc”
-        ticketMasterAPI.searchEvents(API_KEY, "music","hartford",).enqueue(object
-        : Callback<Event> {
+        ticketMasterAPI.searchEvents(API_KEY, "music", "hartford").enqueue(object
+            : Callback<TicketData> {
 
-            override fun onResponse(call: Call<Event>, response: Response<EventResponse>) {
+            override fun onResponse(call: Call<TicketData>, response: Response<TicketData>) {
                 Log.d(TAG, "onResponse: $response")
 
                 // Get access to the body with response.body().
@@ -67,9 +68,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
 
-
                 // Add all items from the API response (parsed using Gson) to the user list
-                userList.addAll(body.results)
+                userList.addAll(body.)
                 // Update the adapter with the new data
                 adapter.notifyDataSetChanged()
             }
@@ -84,9 +84,11 @@ class MainActivity : AppCompatActivity() {
         editTextCity.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                 event?.action == KeyEvent.ACTION_DOWN &&
-                event.keyCode == KeyEvent.KEYCODE_ENTER) {
+                event.keyCode == KeyEvent.KEYCODE_ENTER
+            ) {
                 // Hide the keyboard
-                val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val inputMethodManager =
+                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(v.windowToken, 0)
                 // Perform the search when 'Enter' is pressed
                 searchButton.performClick()

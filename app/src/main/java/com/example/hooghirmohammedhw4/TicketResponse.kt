@@ -1,7 +1,5 @@
 package com.example.hooghirmohammedhw4
 
-import android.app.usage.UsageEvents
-
 //data class EventResponse (val events: List<UsageEvents.Event>)
 
 
@@ -12,8 +10,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide                     // Error on bumptech
-import com.google.firebase.firestore.auth.User
 
 
 class UsersAdapter(private val users: ArrayList<Event>) : RecyclerView.Adapter<UsersAdapter.MyViewHolder>() {
@@ -48,30 +44,33 @@ class UsersAdapter(private val users: ArrayList<Event>) : RecyclerView.Adapter<U
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         val currentItem = users[position]
-        holder.ticketImage.imageAlpha = currentItem.ticketImage
-        holder.ticketName.text = "${currentItem.ticketName.title} "
-        holder.ticketLocation.text = currentItem.ticketLocation
-        holder.ticketAddress.text = currentItem.ticketAddress
-        holder.ticketDate.text = currentItem.ticketDate
-        holder.priceRange.text = currentItem.priceRange
-        holder.seeTicket.text = currentItem.seeTicket   // "See Tickets"???
-        holder.seeTicket.setOnClickListener {
-            /* When button is clicked, opens the ticket page link
-            obtained from the API in the device's web browser */
-        }
+//        holder.ticketImage.imageAlpha = currentItem.ticketImage
+//        holder.ticketName.text = "${currentItem.ticketName.title} "
+//        holder.ticketLocation.text = currentItem.ticketLocation
+//        holder.ticketAddress.text = currentItem.ticketAddress
+//        holder.ticketDate.text = currentItem.ticketDate
+//        holder.priceRange.text = currentItem.priceRange
+//        holder.seeTicket.text = currentItem.seeTicket   // "See Tickets"???
+//            val highestQualityImage = currentItem.images.maxByOrNull {
+//            it.width.toInt() * it.height.toInt()                      // For highest quality image
+//            }
+//        holder.seeTicket.setOnClickListener {
+//            /* When button is clicked, opens the ticket page link
+//            obtained from the API in the device's web browser */
+//        }
 
 
         // Get the context for glide
         val context = holder.itemView.context
 
         // Load the image from the url using Glide library
-        Glide.with(context)     // DO I need a class for GLIDE???
-            .load(currentItem.imageUrl.medium)
-//            .placeholder(R.drawable.baseline_account_circle_24) // In case the image is not loaded show this placeholder image
-//            .circleCrop() // optional - Circle image with rounded corners
-            .into(holder.ticketImage)
-
-    }
+//        Glide.with(context)     // DO I need a class for GLIDE???
+//            .load(currentItem.imageUrl.medium)
+////            .placeholder(R.drawable.baseline_account_circle_24) // In case the image is not loaded show this placeholder image
+////            .circleCrop() // optional - Circle image with rounded corners
+//            .into(holder.ticketImage)
+//
+//    }
 
     override fun getItemCount(): Int {
         // Return the size of your dataset (invoked by the layout manager)

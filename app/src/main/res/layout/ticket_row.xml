@@ -3,106 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
-             <!-- FIGURE OUT CORNER RADIUS ISSUE, also figure out why there is a padding border blocking
-                me from putting the price range and ticket button lower -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="parent"
-        tools:layout_editor_absoluteX="8dp">
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="403dp"
-        android:layout_height="261dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="164dp"
-        android:padding="16dp"
+        android:layout_width="407dp"
+        android:layout_height="209dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" >
 
-        <!-- android:contentDescription="@string/conductor_image" -->
-        <!-- android:src="@drawable/sample_conductor" -->
-        <ImageView
-            android:id="@+id/imageViewTicket"
-            android:layout_width="371dp"
-            android:layout_height="107dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="H,16:9"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textViewTicket"
-            android:layout_width="197dp"
-            android:layout_height="21dp"
-            android:text="Hartford Symphony Orchestra"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="#5c8efa"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="113dp" />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_launcher_background" />
 
-        <TextView
-            android:id="@+id/textViewLocation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Bushnell Theatre/ Mortensen Hall, Hartford"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="138dp" />
-
-        <TextView
-            android:id="@+id/textViewAddress"
-            android:layout_width="333dp"
-            android:layout_height="17dp"
-            android:text="Address: 166 Capitol Ave, Hartford, Connecticut"
-            android:textSize="10sp"
-            android:textStyle="italic"
-            tools:layout_editor_absoluteX="-1dp"
-            tools:layout_editor_absoluteY="161dp" />
-
-
-        <TextView
-            android:id="@+id/textViewDate"
-            android:layout_width="191dp"
-            android:layout_height="19dp"
-            android:text="Date: 03/23/2024 @ 7:30 PM"
-            android:textColor="#11ad1c"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="-1dp"
-            tools:layout_editor_absoluteY="185dp" />
-
-        <TextView
-            android:id="@+id/textViewPrice"
-            android:layout_width="195dp"
-            android:layout_height="16dp"
-            android:text="Price Range: $61.0 - $201.0"
-            android:textSize="10sp"
-            tools:layout_editor_absoluteX="-1dp"
-            tools:layout_editor_absoluteY="213dp" />
-
-        <Button
-            android:id="@+id/buttonBuyTicket"
-            android:layout_width="95dp"
-            android:layout_height="35dp"
-            android:text="See Tickets"
-            android:textSize="8sp"
-            tools:layout_editor_absoluteX="274dp"
-            tools:layout_editor_absoluteY="194dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="96dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
