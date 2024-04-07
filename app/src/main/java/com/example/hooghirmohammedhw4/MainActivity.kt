@@ -5,15 +5,18 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.auth.User
 import com.google.gson.annotations.SerializedName
-import okhttp3.Response
+import retrofit2.Response
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -23,8 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     private var API_KEY = "NpX8VLS2UGJeuzpUeAGf70SfzAJuSP8Z"
     private var BASE_URL = "https://app.ticketmaster.com/discovery/v2/"
+    private val TAG = "MainActivity"
 
-    // Global variables for editText keyword & editText city & search button
     private lateinit var editTextKeyword: EditText
     private lateinit var editTextCity: EditText
     private lateinit var searchButton: Button
@@ -33,76 +36,50 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Define an array to store a list of users -- this will be the list storing information
-        // coming from the API
         val userList = ArrayList<Event>()
+        val adapter = TicketResponse(userList)
 
-        // specify a viewAdapter for the dataset
-        val adapter = UsersAdapter(userList)
-
-        // Initialize editText's & button
         editTextKeyword = findViewById(R.id.editTextKeyword)
         editTextCity = findViewById(R.id.editTextCity)
         searchButton = findViewById(R.id.searchButton)
 
-        // Creating a Retrofit instance with specified base URL and Gson converter factory
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+        recyclerView.visibility = View.GONE
+
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL) // Set the base URL for the REST API
-            .addConverterFactory(GsonConverterFactory.create()) // Add Gson converter factory for JSON serialization/deserialization
-            .build() // Build the Retrofit instance
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
         val ticketMasterAPI = retrofit.create(TicketMasterApi::class.java)
 
-        //  “date,asc”
-        ticketMasterAPI.searchEvents(API_KEY, "music", "hartford").enqueue(object
-            : Callback<TicketData> {
-
-            override fun onResponse(call: Call<TicketData>, response: Response<TicketData>) {
-                Log.d(TAG, "onResponse: $response")
-
-                // Get access to the body with response.body().
-                val body = response.body()
-                if (body == null) {
-                    Log.w(TAG, "Valid response was not received")
-                    return
-                }
-
-
-                // Add all items from the API response (parsed using Gson) to the user list
-                userList.addAll(body.)
-                // Update the adapter with the new data
-                adapter.notifyDataSetChanged()
-            }
-
-            override fun onFailure(call: Call<Event>, t: Throwable) {
-                Log.d(TAG, "onFailure : $t")
-            }
-
-        })
-
-        // Set action listener for hiding keyboard on pressing 'Enter'
         editTextCity.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                 event?.action == KeyEvent.ACTION_DOWN &&
                 event.keyCode == KeyEvent.KEYCODE_ENTER
             ) {
-                // Hide the keyboard
                 val inputMethodManager =
                     getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(v.windowToken, 0)
-                // Perform the search when 'Enter' is pressed
                 searchButton.performClick()
-                true // Consume the event
+                true
             } else {
-                false // Let the system handle the event
+                false
             }
         }
 
-        // Search Button On Click Listener
         searchButton.setOnClickListener {
             val keyword = editTextKeyword.text.toString().trim()
             val city = editTextCity.text.toString().trim()
             when {
+                keyword.isEmpty() && city.isEmpty() -> showAlert(
+                    "Search term and city missing",
+                    "Search term and city cannot be empty. Please enter both."
+                )
+
                 keyword.isEmpty() -> showAlert(
                     "Search term missing",
                     "Search term cannot be empty. Please enter a search term."
@@ -113,11 +90,39 @@ class MainActivity : AppCompatActivity() {
                     "City cannot be empty. Please enter a city."
                 )
 
-                else -> performSearch(keyword, city)
+                else -> {
+                    userList.clear()
+                    ticketMasterAPI.searchEvents(API_KEY, keyword, city)
+                        .enqueue(object : Callback<TicketData> {
+                            override fun onResponse(
+                                call: Call<TicketData>,
+                                response: Response<TicketData>
+                            ) {
+                                if (response.isSuccessful && response.body() != null) {
+                                    val events = response.body()!!.embedded.events
+                                    userList.addAll(events)
+                                    adapter.notifyDataSetChanged()
+                                    recyclerView.visibility = View.VISIBLE
+                                } else {
+                                    showAlert(
+                                        "No Results Found",
+                                        "No events found for the provided search terms. Please try again."
+                                    )
+                                }
+                            }
+
+                            override fun onFailure(call: Call<TicketData>, t: Throwable) {
+                                Log.e(TAG, "API call failed", t)
+                                showAlert(
+                                    "Error",
+                                    "Failed to fetch events: ${t.localizedMessage}"
+                                )
+                            }
+                        })
+                }
             }
         }
     }
-
 
     private fun showAlert(title: String, message: String) {
         AlertDialog.Builder(this)
@@ -127,8 +132,55 @@ class MainActivity : AppCompatActivity() {
             .create()
             .show()
     }
-
-    private fun performSearch(keyword: String, city: String) {
-
-    }
 }
+
+
+//  “date,asc”
+//        ticketMasterAPI.searchEvents(API_KEY, "Music", "Hartford").enqueue(object
+//            : Callback<TicketData> {
+//
+//            override fun onResponse(call: Call<TicketData>, response: Response<TicketData>) {
+//                Log.d(TAG, "onResponse: $response")
+//
+//                if (response.isSuccessful && response.body() != null) {
+//                    val body = response.body()!!
+//                    // Use the body
+//                    Log.d(TAG, "onResponse: $body")
+//
+//                    // Clear the userList before adding new items to avoid showing stale data
+//                    userList.clear()
+//
+//                    // Assuming '_embedded' and 'events' are correctly parsed and not null
+//                    userList.addAll(body.embedded.events)
+//
+//                    // Notify the adapter that the data has changed
+//                    adapter.notifyDataSetChanged()
+//
+//                    // Make sure to set the RecyclerView visibility to VISIBLE
+////                    recyclerView.visibility = View.VISIBLE
+//                } else {
+//                    // Handle the case where the response is not successful or the body is null
+//                    Log.w(TAG, "Response was not successful or was empty")
+//                    // Optionally, show an alert dialog or a toast to inform the user
+//                }
+//
+//
+//                // Get access to the body with response.body().
+//                val body = response.body()
+//                if (body == null) {
+//                    Log.w(TAG, "Valid response was not received")
+//                    return
+//                }
+//                // Clear userList before adding new items from the API response to avoid showing state data
+//                userList.clear()
+//                // Add all items from the API response (parsed using Gson) to the user list
+//                userList.addAll(body.embedded.events)
+//                // Update the adapter with the new data
+//                adapter.notifyDataSetChanged()
+//            }
+//
+//            override fun onFailure(call: Call<TicketData>, t: Throwable) {
+//                Log.d(TAG, "onFailure : $t")
+//            }
+//
+//        })

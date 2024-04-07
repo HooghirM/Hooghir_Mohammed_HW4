@@ -11,5 +11,5 @@ interface TicketMasterApi {
         @Query("apikey") apiKey: String,
         @Query("keyword") searchTerm: String,
         @Query("city") city: String
-    ): Call<Event>
+    ): Call<TicketData>
 }

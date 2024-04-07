@@ -37,9 +37,8 @@ android {
 
 dependencies {
 
-    // Glide dependencies... UNNCESSESARY???
-    implementation ("com.github.bumptech.glide:glide:5.0.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:5.0.0")
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
     // Card View dependencies
     implementation ("androidx.cardview:cardview:1.0.0")
