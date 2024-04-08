@@ -3,95 +3,109 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#D8D8D8"
+    android:padding="10dp">
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="407dp"
-        android:layout_height="209dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imageViewTicket"
-                android:layout_width="160dp"
-                android:layout_height="80dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
-                android:id="@+id/textViewTicket"
+                android:id="@+id/textViewEvent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="96dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.074"
+                android:layout_marginStart="40dp"
+                android:text="Event"
+                android:textColor="#4588f5"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/imageViewTicket" />
+
 
             <TextView
-                android:id="@+id/textViewLocation"
+                android:id="@+id/textViewVenue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.074"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="5dp"
+                android:text="Venue"
+                android:textColor="@color/black"
+                android:textSize="12dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTicket" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewEvent" />
 
             <TextView
                 android:id="@+id/textViewAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.074"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:text="Address"
+                android:textStyle="italic"
+                android:textSize="12dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewLocation" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewVenue" />
+
 
             <TextView
                 android:id="@+id/textViewDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.074"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="4dp"
+                android:text="Date"
+                android:textColor="#10b33b"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewAddress" />
 
             <TextView
-                android:id="@+id/textViewPrice"
+                android:id="@+id/textViewPriceRange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.074"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="4dp"
+                android:text="PriceRange"
+                android:textSize="12dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
 
             <Button
-                android:id="@+id/buttonBuyTicket"
-                android:layout_width="76dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="289dp"
-                android:layout_marginTop="64dp"
-                android:paddingLeft="12dp"
-                android:paddingTop="8dp"
-                android:paddingRight="12dp"
-                android:paddingBottom="8dp"
+                android:id="@+id/buttonVenueLink"
+                android:layout_width="83dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="68dp"
+                android:layout_marginEnd="28dp"
+                android:backgroundTint="#2c97e8"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
                 android:text="See Tickets"
-                android:textSize="8dp"
+                android:textSize="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textViewPrice"
                 app:layout_constraintTop_toBottomOf="@+id/imageViewTicket" />
 
 

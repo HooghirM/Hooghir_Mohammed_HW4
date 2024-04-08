@@ -40,8 +40,8 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="City"
+        android:inputType="text"
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextKeyword" />
@@ -53,12 +53,13 @@
         android:layout_marginStart="292dp"
         android:layout_marginTop="40dp"
         android:text="Search"
-        android:background="@drawable/red_background"
+        android:backgroundTint="@color/red"
         app:layout_constraintStart_toStartOf="@+id/editTextCity"
         app:layout_constraintTop_toTopOf="@+id/editTextKeyword" />
 
 
     <!-- Rows for Ticket -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="409dp"
@@ -67,8 +68,19 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextCity"
         tools:listitem="@layout/ticket_row" />
+
+    <TextView
+        android:id="@+id/noResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

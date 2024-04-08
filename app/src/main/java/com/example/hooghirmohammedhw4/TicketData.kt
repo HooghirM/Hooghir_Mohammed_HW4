@@ -2,10 +2,6 @@ package com.example.hooghirmohammedhw4
 
 import com.google.gson.annotations.SerializedName
 
-//data class TicketData(
-////    val _embedded: EmbeddedData
-//)
-
 data class TicketData(
     @SerializedName("_embedded") val embedded: EmbeddedEvents
 )
@@ -64,12 +60,3 @@ data class Event(
         @SerializedName("max") val max: Double?
     )
 }
-
-
-//class PriceRange (val min: Float, val max: Float)
-//
-//class Venue (val name: String, val city: String, val state: String, val address: String, val url: String)
-//
-//class Start (val dateTime: String)
-//
-//class Image (val url: String)
