@@ -40,6 +40,7 @@ class TicketResponse(private val users: ArrayList<Event>) : RecyclerView.Adapter
         val ticketDate = itemView.findViewById<TextView>(R.id.textViewDate)
         val priceRange = itemView.findViewById<TextView>(R.id.textViewPriceRange)
         val ticketButton = itemView.findViewById<Button>(R.id.buttonVenueLink)
+// Put see tickets onClick here
 
     }
 
